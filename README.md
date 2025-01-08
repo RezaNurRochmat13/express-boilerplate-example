@@ -33,6 +33,21 @@ Technology Stack used in this project:
 - Prisma
 - PostgreSQL
 
+## Architecture
+
+Architecture used in this project:
+
+```bash
+- config => Configuration of application, databases etc
+- controllers => Controller of application
+- core => Core of application
+- routes => Routes of application
+- service => Bussiness logic of application
+- utils => Utils of application
+- repository => Repository of application
+- middleware => Middleware of application
+```
+
 ## Author
 
 Author of this project:
