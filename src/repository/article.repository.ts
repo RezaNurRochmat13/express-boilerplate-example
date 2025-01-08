@@ -8,28 +8,28 @@ export function ArticleRepository() {
     async function findById(id: string) {
         return await prisma.article.findUnique({
             where: {
-                id: id
+                id: parseInt(id)
             }
         })
     }
 
-    async function create(title: string, body: string) {
+    async function create(title: string, description: string) {
         return await prisma.article.create({
             data: {
                 title: title,
-                body: body
+                description: description
             }
         })
     }
 
-    async function update(id: string, title: string, body: string) {
+    async function update(id: string, title: string, description: string) {
         return await prisma.article.update({
             where: {
-                id: id
+                id: parseInt(id)
             },
             data: {
                 title: title,
-                body: body
+                description: description
             }
         })
     }
@@ -37,7 +37,7 @@ export function ArticleRepository() {
     async function destroy(id: string) {
         return await prisma.article.update({
             where: {
-                id: id
+                id: parseInt(id)
             },
             data: {
                 deletedAt: new Date()
