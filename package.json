@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "npx tsc",
-    "start": "node dist/index.js",
+    "start": "node build/index.js",
     "dev": "nodemon src/index.ts",
-    "sync:database": "npx prisma migrate dev --name init --schema ./src/config/prisma/schema.prisma",
-    "sync:model": "npx prisma generate --schema ./src/config/prisma/schema.prisma"
+    "db:generate": "pnpx prisma generate --schema ./src/config/prisma",
+    "db:migrate": "npx prisma migrate dev --name init --schema ./src/config/prisma/schema.prisma",
+    "db:generate:schema": "npx prisma generate --schema ./src/config/prisma/schema.prisma"
   },
   "keywords": [],
   "author": "",
@@ -17,14 +18,15 @@
     "@prisma/client": "^6.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "prisma": "^6.1.0"
+    "express": "^4.21.2"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "nodemon": "^3.1.7",
+    "prisma": "^6.1.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
-  }
+  },
+  "packageManager": "pnpm@10.11.0"
 }
