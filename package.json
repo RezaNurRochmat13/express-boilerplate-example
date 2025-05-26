@@ -7,7 +7,7 @@
     "build": "npx tsc",
     "start": "node build/index.js",
     "dev": "nodemon src/index.ts",
-    "db:generate": "pnpx prisma generate --schema ./src/config/prisma",
+    "db:generate": "npx prisma generate --schema ./src/config/prisma",
     "db:migrate": "npx prisma migrate dev --name init --schema ./src/config/prisma/schema.prisma",
     "db:generate:schema": "npx prisma generate --schema ./src/config/prisma/schema.prisma"
   },
