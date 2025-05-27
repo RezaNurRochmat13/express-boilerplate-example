@@ -30,6 +30,13 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install --only=production
 
+RUN ls -la
+
+# ⬇️ Copy built artifact dan Prisma Client
+COPY --from=builder /app/build ./build
+COPY --from=builder /app/node_modules/.prisma /app/node_modules/.prisma
+COPY --from=builder /app/node_modules/@prisma /app/node_modules/@prisma
+
 # Copy built artifact
 COPY --from=builder /app/build ./build
 
