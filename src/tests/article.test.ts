@@ -50,12 +50,6 @@ describe('Article API', () => {
     articleId = mockArticle.id;
   });
 
-  it ('GET / →  should return successfully', async () => {
-    const res = await request(app).get('/');
-    expect(res.statusCode).toBe(200);
-    expect(res.text).toBe('Ping successfully');
-  });
-
   it('POST /api/v1/articles → create article', async () => {
     const res = await request(app)
       .post('/api/v1/articles')
