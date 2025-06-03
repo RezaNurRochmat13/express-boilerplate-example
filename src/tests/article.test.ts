@@ -3,24 +3,30 @@ import request from 'supertest';
 import { PrismaClient } from '@prisma/client';
 import { useApp } from '../core/app';
 
-const app = useApp()
-
 dotenv.config({ path: '.env.test' });
+
+const app = useApp();
 
 const testPrisma = new PrismaClient({
   datasources: {
-    db: {
-      url: process.env.DATABASE_URL,
-    },
+    db: { url: process.env.DATABASE_URL },
   },
 });
+
+let articleId: number;
+
+// Helper: create one article
+async function createMockArticle(title = 'Default Article') {
+  const article = await testPrisma.article.create({ data: { title } });
+  return article;
+}
 
 beforeAll(async () => {
   await testPrisma.$connect();
 });
 
 afterEach(async () => {
-  await testPrisma.article.deleteMany(); // bersihkan data antar test
+  await testPrisma.article.deleteMany();
 });
 
 afterAll(async () => {
@@ -28,26 +34,9 @@ afterAll(async () => {
 });
 
 describe('Article API', () => {
-  let articleId: number;
-
   beforeEach(async () => {
-    await testPrisma.article.deleteMany();
-    await testPrisma.article.createMany({
-      data: [
-        { title: 'Mock Article 1' },
-        { title: 'Mock Article 2' },
-      ],
-    });
-  });
-
-  beforeEach(async () => {
-    await testPrisma.article.deleteMany();
-
-    const mockArticle = await testPrisma.article.create({
-      data: { title: 'Mock Article for GET by ID' },
-    });
-
-    articleId = mockArticle.id;
+    const mock = await createMockArticle('Mock Article for GET by ID');
+    articleId = mock.id;
   });
 
   it('POST /api/v1/articles → create article', async () => {
@@ -57,25 +46,29 @@ describe('Article API', () => {
 
     expect(res.statusCode).toBe(201);
     expect(res.body.message).toBe('Article created successfully');
-    articleId = res.body.id;
+    expect(res.body.data.title).toBe('New Article');
   });
 
   it('GET /api/v1/articles → should return all articles', async () => {
+    await createMockArticle('Another Article');
     const res = await request(app).get('/api/v1/articles');
+
     expect(res.statusCode).toBe(200);
     expect(Array.isArray(res.body?.data)).toBe(true);
+    expect(res.body.data.length).toBeGreaterThanOrEqual(1);
   });
 
   it('GET /api/v1/articles/:id → should return one article', async () => {
     const res = await request(app).get(`/api/v1/articles/${articleId}`);
+
     expect(res.statusCode).toBe(200);
     expect(res.body?.data?.id).toBe(articleId);
   });
 
-   it('GET /api/v1/articles/:id → not found article', async () => {
+  it('GET /api/v1/articles/:id → not found article', async () => {
     const randomId = articleId + 999999;
     const res = await request(app).get(`/api/v1/articles/${randomId}`);
-    console.log(res.body);
+
     expect(res.statusCode).toBe(404);
     expect(res.body.message).toBe('Article not found');
   });
@@ -92,5 +85,8 @@ describe('Article API', () => {
   it('DELETE /api/v1/articles/:id → delete article', async () => {
     const res = await request(app).delete(`/api/v1/articles/${articleId}`);
     expect(res.statusCode).toBe(200);
+
+    const getRes = await request(app).get(`/api/v1/articles/${articleId}`);
+    expect(getRes.statusCode).toBe(404);
   });
 });
