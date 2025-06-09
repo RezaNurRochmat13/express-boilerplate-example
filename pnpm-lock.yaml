@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@bull-board/api':
+        specifier: ^6.10.0
+        version: 6.10.0(@bull-board/ui@6.10.0)
+      '@bull-board/express':
+        specifier: ^6.10.0
+        version: 6.10.0
       '@prisma/client':
         specifier: ^6.1.0
         version: 6.8.2(prisma@6.8.2(typescript@5.8.3))(typescript@5.8.3)
@@ -230,6 +236,17 @@ packages:
 
   '@bcoe/v8-coverage@0.2.3':
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
+
+  '@bull-board/api@6.10.0':
+    resolution: {integrity: sha512-iAjvKihIEyPeD9wXQAuObi0lGyYTNa/YhK6uTt7EME92plBBu1GzzcChu3q4aIljQoHl0wM2o7IHxC9d3pONIA==}
+    peerDependencies:
+      '@bull-board/ui': 6.10.0
+
+  '@bull-board/express@6.10.0':
+    resolution: {integrity: sha512-uQMr6WFLr5zbfE237Ed32o7BGHFB7X/73BBAS3xSnmUYRAVRartZgR/IUf2xKS8EeNc1+jxHj9pna3RYHYogFw==}
+
+  '@bull-board/ui@6.10.0':
+    resolution: {integrity: sha512-hHm0AeF14kix/afSPgedJZ7fgTjUjD1JCa1JKonyrZPz4zI+C0E5fTSFyTb45LEzuutHwHVXJotf7sbgp26Mgw==}
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -1454,6 +1471,9 @@ packages:
   lodash.memoize@4.1.2:
     resolution: {integrity: sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag==}
 
+  lodash@4.17.21:
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
@@ -1806,6 +1826,9 @@ packages:
   redis-errors@1.2.0:
     resolution: {integrity: sha512-1qny3OExCf0UvUV/5wpYKf2YwPcOqXzkwKKSmKHiE6ZMQs5heeE/c8eXK+PNllPvmjgAbfnsbpkGZWy8cBpn9w==}
     engines: {node: '>=4'}
+
+  redis-info@3.1.0:
+    resolution: {integrity: sha512-ER4L9Sh/vm63DkIE0bkSjxluQlioBiBgf5w1UuldaW/3vPcecdljVDisZhmnCMvsxHNiARTTDDHGg9cGwTfrKg==}
 
   redis-parser@3.0.0:
     resolution: {integrity: sha512-DJnGAeenTdpMEH6uAJRK/uiyEIH9WVsUmoLwzudwGJUwZPp80PDBWPHXSAGNPwNvIXAbe7MSUB1zQFugFml66A==}
@@ -2392,6 +2415,24 @@ snapshots:
       '@babel/helper-validator-identifier': 7.27.1
 
   '@bcoe/v8-coverage@0.2.3': {}
+
+  '@bull-board/api@6.10.0(@bull-board/ui@6.10.0)':
+    dependencies:
+      '@bull-board/ui': 6.10.0
+      redis-info: 3.1.0
+
+  '@bull-board/express@6.10.0':
+    dependencies:
+      '@bull-board/api': 6.10.0(@bull-board/ui@6.10.0)
+      '@bull-board/ui': 6.10.0
+      ejs: 3.1.10
+      express: 4.21.2
+    transitivePeerDependencies:
+      - supports-color
+
+  '@bull-board/ui@6.10.0':
+    dependencies:
+      '@bull-board/api': 6.10.0(@bull-board/ui@6.10.0)
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
@@ -3982,6 +4023,8 @@ snapshots:
 
   lodash.memoize@4.1.2: {}
 
+  lodash@4.17.21: {}
+
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
@@ -4354,6 +4397,10 @@ snapshots:
       picomatch: 2.3.1
 
   redis-errors@1.2.0: {}
+
+  redis-info@3.1.0:
+    dependencies:
+      lodash: 4.17.21
 
   redis-parser@3.0.0:
     dependencies:

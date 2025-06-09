@@ -19,6 +19,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@bull-board/api": "^6.10.0",
+    "@bull-board/express": "^6.10.0",
     "@prisma/client": "^6.1.0",
     "@types/jest": "^29.5.14",
     "@types/supertest": "^6.0.3",
