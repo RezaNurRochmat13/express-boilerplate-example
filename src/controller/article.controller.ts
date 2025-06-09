@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { ArticleService } from "../service/article.service";
 
 export function ArticleController() {
-    const {  findAllArticles, findArticle, createArticle, updateArticle, deleteArticle } = ArticleService();
+    const {  findAllArticles, findArticle, createArticle, updateArticle, deleteArticle, sendingEmailConfirmation } = ArticleService();
 
     async function index(request: Request, response: Response) {
         const articles = await findAllArticles();
@@ -62,12 +62,23 @@ export function ArticleController() {
         })
     }
 
+    async function sendEmail(request: Request, response: Response) {
+        const { email } = request.body;
+        await sendingEmailConfirmation(email);
+
+        response.status(200).json({
+            message: 'Email sent successfully and processed on background',
+            data: {}
+        })
+    }
+
 
     return {
         index,
         show,
         create,
         update,
-        destroy
+        destroy,
+        sendEmail
     }
 }

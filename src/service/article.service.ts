@@ -1,3 +1,4 @@
+import { emailQueue } from "../jobs/email/queue";
 import { ArticleRepository } from "../repository/article.repository";
 
 export function ArticleService() {
@@ -23,11 +24,16 @@ export function ArticleService() {
         return await destroy(id)
     }
 
+    async function sendingEmailConfirmation(email: string) {
+        await emailQueue.add('sendEmail', { email });
+    }
+
     return {
         findAllArticles,
         findArticle,
         createArticle,
         updateArticle,
-        deleteArticle
+        deleteArticle,
+        sendingEmailConfirmation
     }
 }
