@@ -14,3 +14,5 @@ emailWorker.on('completed', job => {
 emailWorker.on('failed', (job, err) => {
   console.error(`❌ Job ${job?.id} failed:`, err);
 });
+
+export default emailWorker;

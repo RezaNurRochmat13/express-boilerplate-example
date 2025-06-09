@@ -13,7 +13,7 @@
     "test:db": "npx prisma db push --schema=./src/config/prisma/schema.prisma",
     "test": "NODE_ENV=test jest --runInBand",
     "test:full": "npm run test:db && npm run test",
-    "worker:play": "npx ts-node src/workers/email/email.worker.ts"
+    "worker:play": "npx ts-node src/workers/index.ts"
   },
   "keywords": [],
   "author": "",

@@ -5,6 +5,7 @@ import { ExpressAdapter } from '@bull-board/express';
 import { createBullBoard } from "@bull-board/api";
 import { BullMQAdapter } from '@bull-board/api/bullMQAdapter';
 import { emailQueue } from "../jobs/email/queue";
+import { smsQueue } from "../jobs/sms/queue";
 import articleRouter from "../routes/article.route";
 
 dotenv.config();
@@ -20,7 +21,7 @@ serverAdapter.setBasePath('/admin/queues');
 createBullBoard({
   queues: [
     new BullMQAdapter(emailQueue),
-    // Tambahkan queue lain di sini
+    new BullMQAdapter(smsQueue),
   ],
   serverAdapter,
 });
