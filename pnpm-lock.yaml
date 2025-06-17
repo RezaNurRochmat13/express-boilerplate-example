@@ -17,12 +17,6 @@ importers:
       '@prisma/client':
         specifier: ^6.1.0
         version: 6.8.2(prisma@6.8.2(typescript@5.8.3))(typescript@5.8.3)
-      '@types/jest':
-        specifier: ^29.5.14
-        version: 29.5.14
-      '@types/supertest':
-        specifier: ^6.0.3
-        version: 6.0.3
       bullmq:
         specifier: ^5.53.2
         version: 5.53.2
@@ -66,9 +60,15 @@ importers:
       '@types/express':
         specifier: ^5.0.0
         version: 5.0.2
-      '@types/express-pino-logger':
-        specifier: ^4.0.5
-        version: 4.0.5
+      '@types/jest':
+        specifier: ^29.5.14
+        version: 29.5.14
+      '@types/pino-http':
+        specifier: ^5.8.4
+        version: 5.8.4
+      '@types/supertest':
+        specifier: ^6.0.3
+        version: 6.0.3
       nodemon:
         specifier: ^3.1.7
         version: 3.1.10
@@ -488,9 +488,6 @@ packages:
 
   '@types/cors@2.8.18':
     resolution: {integrity: sha512-nX3d0sxJW41CqQvfOzVG1NCTXfFDrDWIghCZncpHeWlVFd81zxB/DLhg7avFg6eHLCRX7ckBmoIIcqa++upvJA==}
-
-  '@types/express-pino-logger@4.0.5':
-    resolution: {integrity: sha512-Fe2oB1F70KPkJAFV52WFNmNpajQVPY1IWmKVF7xBMNgYQU1mVc0Y/JXNP8E9w2uSfXlMIVwhQa+mFCjFvgmRnA==}
 
   '@types/express-serve-static-core@5.0.6':
     resolution: {integrity: sha512-3xhRnjJPkULekpSzgtoNYYcTWgEZkp4myc+Saevii5JPnHNvHMRlBSHDbs7Bh1iPPoVTERHEZXyhyLbMEsExsA==}
@@ -2863,11 +2860,6 @@ snapshots:
   '@types/cors@2.8.18':
     dependencies:
       '@types/node': 22.15.21
-
-  '@types/express-pino-logger@4.0.5':
-    dependencies:
-      '@types/pino': 6.3.12
-      '@types/pino-http': 5.8.4
 
   '@types/express-serve-static-core@5.0.6':
     dependencies:
