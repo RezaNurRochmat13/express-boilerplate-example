@@ -1,4 +1,5 @@
 import express, { Express, Request, Response } from "express";
+import pinoHttp from 'pino-http';
 import dotenv from "dotenv";
 import cors from "cors";
 import { ExpressAdapter } from '@bull-board/express';
@@ -7,12 +8,14 @@ import { BullMQAdapter } from '@bull-board/api/bullMQAdapter';
 import { emailQueue } from "../jobs/email/queue";
 import { smsQueue } from "../jobs/sms/queue";
 import articleRouter from "../routes/article.route";
+import logger from './../logger'
 
 dotenv.config();
 
 const app: Express = express();
 app.use(express.json());
 app.use(cors());
+app.use(pinoHttp({ logger }));
 
 // Bull Board setup
 const serverAdapter = new ExpressAdapter();
