@@ -12,7 +12,10 @@ const logger = pino({
           ignore: 'pid,hostname'
         }
       }
-    : undefined
+    : undefined,
+  serializers: {
+    err: pino.stdSerializers.err
+  }
 });
 
 export default logger;
