@@ -8,6 +8,7 @@ import { BullMQAdapter } from '@bull-board/api/bullMQAdapter';
 import { emailQueue } from "../jobs/email/queue";
 import { smsQueue } from "../jobs/sms/queue";
 import articleRouter from "../routes/article.route";
+import authRouter from "../routes/authentication.route";
 import logger from './../logger'
 
 dotenv.config();
@@ -33,6 +34,7 @@ app.use('/admin/queues', serverAdapter.getRouter());
 
 // Route registration
 app.use('/api/v1', articleRouter);
+app.use('/api/v1/auth', authRouter);
 
 
 function useApp() {
