@@ -14,7 +14,9 @@ export function AuthService() {
         const user = await create(dto.name, dto.email, hashed);
 
         const token = generateToken({ id: user.id, email: user.email });
-        return { token, user };
+        const { password, ...userWithoutPassword } = user;
+
+        return { token, userWithoutPassword };
     }
 
     async function login(dto: LoginDTO) {
@@ -25,7 +27,9 @@ export function AuthService() {
         if (!valid) throw new Error('Invalid credentials');
 
         const token = generateToken({ id: user.id, email: user.email });
-        return { token, user };
+        const { password, ...userWithoutPassword } = user;
+
+        return { token, userWithoutPassword};
     }
 
     return {

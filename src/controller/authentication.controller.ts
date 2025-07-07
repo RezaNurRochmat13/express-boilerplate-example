@@ -10,8 +10,12 @@ export function AuthenticationController() {
             const result = await register(req.body);
             res.json({
                 message: 'User registered successfully',
-                data: result
+                data: {
+                    token: result.token,
+                    user: result.userWithoutPassword
+                }
             });
+
         } catch (err: any) {
             res.status(400).json({ error: err.message });
         }
@@ -20,11 +24,13 @@ export function AuthenticationController() {
     async function loginUser(req: Request, res: Response) {
         try {
             const result = await login(req.body);
-            logger.info(result)
-            console.log('Resultnya :', result)
+
             res.json({
                 message: 'User logged in successfully',
-                data: result
+                data: {
+                    token: result.token,
+                    user: result.userWithoutPassword
+                }
             });
         } catch (err: any) {
             res.status(401).json({ error: err.message });
