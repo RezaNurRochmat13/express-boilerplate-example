@@ -5,11 +5,13 @@ import cors from "cors";
 import { ExpressAdapter } from '@bull-board/express';
 import { createBullBoard } from "@bull-board/api";
 import { BullMQAdapter } from '@bull-board/api/bullMQAdapter';
+import swaggerUi from 'swagger-ui-express';
 import { emailQueue } from "../jobs/email/queue";
 import { smsQueue } from "../jobs/sms/queue";
 import articleRouter from "../routes/article.route";
 import authRouter from "../routes/authentication.route";
 import logger from './../logger'
+import { swaggerSpec } from '../config/swagger.config';
 
 dotenv.config();
 
@@ -17,6 +19,8 @@ const app: Express = express();
 app.use(express.json());
 app.use(cors());
 app.use(pinoHttp({ logger }));
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Bull Board setup
 const serverAdapter = new ExpressAdapter();
