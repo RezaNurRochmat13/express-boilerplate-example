@@ -15,11 +15,10 @@ const options: swaggerJSDoc.Options = {
       },
     ],
   },
-  apis: ['../routes/**/*.ts'], // atau kamu bisa pakai path absolut juga
+  apis: ['../routes/**/*.ts'],
 };
 
 export const swaggerSpec = swaggerJSDoc({
   ...options,
-  // Karena file ini di dalam config, kita perlu path absolut atau resolve
   apis: [__dirname.replace('/config', '/routes') + '/**/*.ts'],
 });
