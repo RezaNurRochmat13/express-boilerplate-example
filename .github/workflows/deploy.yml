@@ -20,12 +20,16 @@ jobs:
           node-version: 20
           cache: 'pnpm'
       
-      - name: Install pnpm
-        run: |
-          npm install -g pnpm@10.11.0
-          echo "$(npm bin -g)" >> $GITHUB_PATH
-          echo "✅ PNPM version:"
-          $(npm bin -g)/pnpm -v
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 10.11.0
+      
+      - name: Debug PATH
+        run: echo $PATH
+
+      - name: Check pnpm version
+        run: pnpm -v
 
       - name: Install dependencies
         run: pnpm install
