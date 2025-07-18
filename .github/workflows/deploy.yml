@@ -21,7 +21,9 @@ jobs:
           cache: 'pnpm'
       
       - name: Install pnpm
-        run: npm install -g pnpm@10.11.0
+        run: |
+          npm install -g pnpm@10.11.0
+          echo "$(npm bin -g)" >> $GITHUB_PATH
 
       - name: Install dependencies
         run: pnpm install
