@@ -24,6 +24,8 @@ jobs:
         run: |
           npm install -g pnpm@10.11.0
           echo "$(npm bin -g)" >> $GITHUB_PATH
+          echo "✅ PNPM version:"
+          $(npm bin -g)/pnpm -v
 
       - name: Install dependencies
         run: pnpm install
