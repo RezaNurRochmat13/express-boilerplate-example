@@ -20,9 +20,7 @@ jobs:
           node-version: 20
       
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2.2.4
-        with:
-          version: 10.11.0
+        run: npm install -g pnpm
       
       - name: Debug PATH
         run: echo $PATH
