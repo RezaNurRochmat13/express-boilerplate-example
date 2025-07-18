@@ -11,19 +11,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout source code
         uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'pnpm'
+      
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install
 
-      - name: Build TypeScript
-        run: npm run build
+      - name: Build project
+        run: pnpm build
 
       - name: Install Fly CLI
         uses: superfly/flyctl-actions/setup-flyctl@master
