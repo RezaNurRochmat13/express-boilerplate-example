@@ -3,7 +3,7 @@ name: Deploy to Fly.io
 on:
   push:
     branches:
-      - main  # Ganti jika deploy dari branch lain
+      - master
 
 jobs:
   deploy:
