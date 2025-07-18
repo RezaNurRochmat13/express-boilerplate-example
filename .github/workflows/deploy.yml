@@ -23,7 +23,10 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 10
+          version: 8
+      
+      - name: Enable Corepack (for pnpm)
+        run: corepack enable
 
       - name: Install dependencies
         run: pnpm install
